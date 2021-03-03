@@ -22,7 +22,7 @@ namespace TP2.Zoo
 
         public override string ToString()
         {
-            return $"{classNumber} {className} {countOfAnimals} {getAnimalNames()}";
+            return $"{className}";
         }
     }
 }

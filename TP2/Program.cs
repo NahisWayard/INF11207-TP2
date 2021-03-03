@@ -17,7 +17,7 @@ namespace TP2
             return o.GetType().GetProperty(prop).GetValue(o, null);
         }
 
-        static void Tennis(string filepath)
+        static void TennisDemo(string filepath)
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
@@ -28,15 +28,16 @@ namespace TP2
             using (var csv = new CsvReader(reader, config))
             {
                 var records = csv.GetRecords<TennisDecision>();
-                var tree = new Tree<TennisDecision>(records.ToList(), "jouer");
+                var tree = new Tree<TennisDecision, string>(records.ToList(), "jouer");
 
                 var toClassificate = new TennisDecision("ensoleilé", "douce", "haute", "oui", null);
                 tree.classificateElement(toClassificate);
                 Console.WriteLine(toClassificate);
+                tree.display();
             }
         }
 
-        static void FormatZoo(string zooFilepath, string classFilepath, string outputPath)
+        static List<Zoo.ClassifiedAnimal> FormatZoo(string zooFilepath, string classFilepath, string outputPath)
         {
             var classifiedAnimals = new List<Zoo.ClassifiedAnimal> { };
 
@@ -49,11 +50,6 @@ namespace TP2
             using (var classCSV = new CsvReader(classReader, config))
             {
                 var classes = classCSV.GetRecords<Zoo.Class>().ToList();
-
-                foreach(var c in classes)
-                {
-                    Console.WriteLine(c);
-                }
 
                 using (var zooReader = new StreamReader(zooFilepath))
                 using (var zooCSV = new CsvReader(zooReader, config))
@@ -70,15 +66,24 @@ namespace TP2
                     using (var outputCSV = new CsvWriter(zooWriter, config))
                     {
                         outputCSV.WriteRecords(classifiedAnimals);
+                        return classifiedAnimals;
                     }
                 }
             }
         }
 
+        static void ZooDemo(List<Zoo.ClassifiedAnimal> animals)
+        {
+            var tree = new Tree<Zoo.ClassifiedAnimal, int>(animals, "classNumber", new List<string> { "name", "className", "animalNames" });
+            tree.display();
+        }
+
         static void Main(string[] args)
         {
-            //Tennis("D:/UQAR/OOP/TP2/data/tennis.csv");
-            FormatZoo("D:/UQAR/OOP/TP2/data/zoo.csv", "D:/UQAR/OOP/TP2/data/class.csv", "D:/UQAR/OOP/TP2/data/formatedZoo.csv");
+            TennisDemo("D:/UQAR/OOP/TP2/data/tennis.csv");
+            Console.WriteLine(new String('-', Console.WindowWidth));
+            var animals = FormatZoo("D:/UQAR/OOP/TP2/data/zoo.csv", "D:/UQAR/OOP/TP2/data/class.csv", "D:/UQAR/OOP/TP2/data/formatedZoo.csv");
+            ZooDemo(animals);
         }
     }
 }

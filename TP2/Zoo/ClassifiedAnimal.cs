@@ -28,7 +28,7 @@ namespace TP2.Zoo
         public int domestic { get; set; }
         public int catsize { get; set; }
         [Name("class_type")]
-        public int classNumber { get; set; }
+        new public int classNumber { get; set; }
 
 
         public ClassifiedAnimal(IAnimal animal, List<Class> classList)
