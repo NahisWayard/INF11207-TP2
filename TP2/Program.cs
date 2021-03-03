@@ -30,10 +30,10 @@ namespace TP2
                 var records = csv.GetRecords<TennisDecision>();
                 var tree = new Tree<TennisDecision, string>(records.ToList(), "jouer");
 
+                tree.display();
                 var toClassificate = new TennisDecision("ensoleilé", "douce", "haute", "oui", null);
                 tree.classificateElement(toClassificate);
                 Console.WriteLine(toClassificate);
-                tree.display();
             }
         }
 
@@ -76,6 +76,9 @@ namespace TP2
         {
             var tree = new Tree<Zoo.ClassifiedAnimal, int>(animals, "classNumber", new List<string> { "name", "className", "animalNames" });
             tree.display();
+            var toClassificate = new Zoo.ClassifiedAnimal("strange animal", 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1);
+            tree.classificateElement(toClassificate);
+            Console.WriteLine(toClassificate);
         }
 
         static void Main(string[] args)

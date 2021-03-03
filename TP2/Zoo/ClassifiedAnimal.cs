@@ -30,6 +30,27 @@ namespace TP2.Zoo
         [Name("class_type")]
         new public int classNumber { get; set; }
 
+        public ClassifiedAnimal(string name, int hair, int feathers, int eggs, int milk, int airborne, int aquatic, int predator, int toothed, int backbone, int breathes, int venomous, int fins, int legs, int tail, int domestic, int catsize, int classNumber = -1)
+        {
+            this.name = name;
+            this.hair = hair;
+            this.feathers = feathers;
+            this.eggs = eggs;
+            this.milk = milk;
+            this.airborne = airborne;
+            this.aquatic = aquatic;
+            this.predator = predator;
+            this.toothed = toothed;
+            this.backbone = backbone;
+            this.breathes = breathes;
+            this.venomous = venomous;
+            this.fins = fins;
+            this.legs = legs;
+            this.tail = tail;
+            this.domestic = domestic;
+            this.catsize = catsize;
+            this.classNumber = classNumber;
+        }
 
         public ClassifiedAnimal(IAnimal animal, List<Class> classList)
         {

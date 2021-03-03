@@ -28,6 +28,7 @@ namespace TP2.Tree
 
             if (datasetEntropy == 0)
             {
+                /*
                 foreach (var s in filteredAttributes)
                 {
                     try
@@ -43,6 +44,7 @@ namespace TP2.Tree
                     Console.WriteLine($"{e}");
                 }
                 Console.WriteLine();
+                */
                 return;
             }
 
@@ -71,10 +73,10 @@ namespace TP2.Tree
             }
         }
 
-        public string getChoice()
+        public object getChoice()
         {
             if (subNodes.Count == 0)
-                return (string)Program.getProperty(elements.First(), classifierAttribute);
+                return Program.getProperty(elements.First(), classifierAttribute);
             throw new Exception("Node is not a terminaison node, can't make a decision");
         }
 
