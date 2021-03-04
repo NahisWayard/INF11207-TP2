@@ -24,6 +24,7 @@ namespace TP2
                 Delimiter = ","
             };
 
+
             using (var reader = new StreamReader(filepath))
             using (var csv = new CsvReader(reader, config))
             {
@@ -83,10 +84,29 @@ namespace TP2
 
         static void Main(string[] args)
         {
-            TennisDemo("D:/UQAR/OOP/TP2/data/tennis.csv");
-            Console.WriteLine(new String('-', Console.WindowWidth));
-            var animals = FormatZoo("D:/UQAR/OOP/TP2/data/zoo.csv", "D:/UQAR/OOP/TP2/data/class.csv", "D:/UQAR/OOP/TP2/data/formatedZoo.csv");
-            ZooDemo(animals);
+            try
+            {
+                switch (args.Length)
+                {
+                    case 1:
+                        TennisDemo(args[0]);
+                        break;
+                    case 3:
+                        var animals = FormatZoo(args[0], args[1], args[2]);
+                        ZooDemo(animals);
+                        break;
+                    default:
+                        Console.WriteLine("Usage:");
+                        Console.WriteLine("./TP2 pathToTennisCSV");
+                        Console.WriteLine("./TP2 pathToZooCSV pathToClassCSV pathOutputCSV");
+                        break;
+                }
+            }
+            catch (System.IO.IOException e)
+            {
+                Console.WriteLine(e.Message, Console.Error);
+                Environment.Exit(1);
+            }
         }
     }
 }
