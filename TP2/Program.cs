@@ -77,8 +77,9 @@ namespace TP2
         {
             var tree = new Tree<Zoo.ClassifiedAnimal, int>(animals, "classNumber", new List<string> { "name", "className", "animalNames" });
             tree.display();
-            var toClassificate = new Zoo.ClassifiedAnimal("strange animal", 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1);
+            var toClassificate = new Zoo.ClassifiedAnimal("strange animal", 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1);
             tree.classificateElement(toClassificate);
+            toClassificate.className = animals.First(x => x.classNumber == toClassificate.classNumber).className;
             Console.WriteLine(toClassificate);
         }
 
